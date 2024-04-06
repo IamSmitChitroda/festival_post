@@ -1,4 +1,5 @@
 import 'package:festival_post/headers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,16 +13,20 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue.shade300,
         centerTitle: true,
-        title: const Text("Festivals"),
+        title: Text(
+          "Festivals",
+          style: GoogleFonts.aladin(textStyle: TextStyle(fontSize: 40)),
+        ),
       ),
-      // ==============================================================
       body: Column(
         children: [
           // SearchBar
           const Padding(
             padding: EdgeInsets.all(16),
             child: SearchBar(
+              hintText: "Search here",
               leading: Icon(Icons.search),
             ),
           ),
@@ -80,28 +85,30 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: ListView(
-                children: [
-                  ...festivalData.festivals
-                      .map(
-                        (e) => Card(
-                          color: Colors
-                              .primaries[festivalData.festivals.indexOf(e)]
-                              .shade100,
-                          shadowColor: Colors
-                              .primaries[festivalData.festivals.indexOf(e)],
-                          child: ListTile(
-                              trailing:
-                                  const Icon(Icons.arrow_forward_ios_sharp),
-                              onTap: () => Navigator.pushNamed(
-                                    context,
-                                    AppRoutes.instance.detailPage,
-                                    arguments: e,
-                                  ),
-                              title: Text(e.name)),
-                        ),
-                      )
-                      .toList()
-                ],
+                physics: const BouncingScrollPhysics(),
+                children: festivalData.festivals
+                    .map(
+                      (e) => Card(
+                        color: Colors
+                            .primaries[(festivalData.festivals.indexOf(e)) +
+                                ((festivalData.festivals.indexOf(e)))]
+                            .shade100,
+                        child: ListTile(
+                            trailing: const Icon(Icons.arrow_forward_ios_sharp),
+                            onTap: () => Navigator.pushNamed(
+                                  context,
+                                  AppRoutes.instance.detailPage,
+                                  arguments: e,
+                                ),
+                            title: Text(
+                              e.name,
+                              style: const TextStyle(
+                                fontSize: 18.3,
+                              ),
+                            )),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ),

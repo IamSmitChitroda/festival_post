@@ -43,6 +43,7 @@ dependencies:
   share_extend: ^2.0.0
   flex_color_picker: ^3.4.1
   cyclop: ^0.7.0
+  google_fonts: ^5.1.0
 
 dev_dependencies:
   flutter_test:

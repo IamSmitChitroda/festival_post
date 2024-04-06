@@ -16,3 +16,5 @@ export 'package:image_gallery_saver/image_gallery_saver.dart';
 export 'package:path_provider/path_provider.dart';
 export 'dart:io';
 export 'dart:math';
+export 'package:cyclop/cyclop.dart';
+export 'package:share_extend/share_extend.dart';

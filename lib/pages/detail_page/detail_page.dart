@@ -1,9 +1,7 @@
 import 'dart:ui' as ui;
-
-import 'package:cyclop/cyclop.dart';
 import 'package:festival_post/headers.dart';
-import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:share_extend/share_extend.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -43,7 +41,6 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     Globals.instance.reset();
-
     super.initState();
   }
 
@@ -55,28 +52,36 @@ class _DetailPageState extends State<DetailPage> {
     return EyeDrop(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue.shade300,
           leading: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(Icons.arrow_back_ios),
           ),
           centerTitle: true,
-          title: Text(data.name),
+          title: Text(
+            data.name,
+            style: GoogleFonts.aladin(textStyle: const TextStyle(fontSize: 30)),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
+              // Image
               Expanded(
                 child: RepaintBoundary(
                   key: widgetKey,
                   child: Container(
                     width: size.width,
                     decoration: BoxDecoration(
+                      color: Colors.white,
                       border: Border.all(),
                       image: DecorationImage(
-                        image: AssetImage((selectedImage != null)
-                            ? selectedImage!
-                            : data.frame[0]),
+                        image: AssetImage(
+                          (selectedImage != null)
+                              ? selectedImage!
+                              : data.frame[0],
+                        ),
                       ),
                     ),
                     child: GestureDetector(
@@ -120,10 +125,12 @@ class _DetailPageState extends State<DetailPage> {
                         child: Center(
                           child: Text(
                             quote,
-                            textAlign: TextAlign.center,
+                            textAlign: Globals.instance.quoteTextAlignment,
                             style: TextStyle(
                               fontSize: Globals.instance.size,
                               color: Globals.instance.quoteTextColor,
+                              letterSpacing:
+                                  Globals.instance.quotelettringSpacing,
                             ),
                           ),
                         ),
@@ -140,38 +147,64 @@ class _DetailPageState extends State<DetailPage> {
                     SizedBox(
                       width: size.width * 0.025,
                     ),
-                    ElevatedButton.icon(
+                    TextButton.icon(
                       onPressed: () =>
                           setState(() => Globals.instance.index = 0),
-                      label: const Text("Frame"),
-                      icon: const Icon(Icons.filter_frames_outlined),
+                      label: const Text(
+                        "Frame",
+                        style: TextStyle(color: Colors.black54),
+                      ),
+                      icon: const Icon(
+                        Icons.filter_frames_outlined,
+                        color: Colors.black54,
+                      ),
                     ),
                     SizedBox(
                       width: size.width * 0.025,
                     ),
-                    ElevatedButton.icon(
+                    TextButton.icon(
                       onPressed: () =>
                           setState(() => Globals.instance.index = 1),
-                      label: const Text("Quote"),
-                      icon: const Icon(Icons.format_quote),
+                      label: const Text(
+                        "Quote",
+                        style: TextStyle(color: Colors.black54),
+                      ),
+                      icon: const Icon(
+                        Icons.format_quote,
+                        color: Colors.black54,
+                      ),
                     ),
                     SizedBox(
                       width: size.width * 0.025,
                     ),
-                    ElevatedButton.icon(
+                    TextButton.icon(
                       onPressed: () =>
                           setState(() => Globals.instance.index = 2),
-                      label: const Text("Text"),
-                      icon: const Icon(Icons.text_increase),
+                      label: const Text(
+                        "Text",
+                        style: TextStyle(color: Colors.black54),
+                      ),
+                      icon: const Icon(
+                        Icons.text_increase,
+                        color: Colors.black54,
+                      ),
                     ),
                     SizedBox(
                       width: size.width * 0.025,
                     ),
-                    ElevatedButton.icon(
+                    TextButton.icon(
                       onPressed: () =>
                           setState(() => Globals.instance.index = 3),
-                      label: const Text("Colour"),
-                      icon: const Icon(Icons.color_lens_outlined),
+                      label: const Text(
+                        "Colour",
+                        style: TextStyle(
+                          color: Colors.black54,
+                        ),
+                      ),
+                      icon: const Icon(
+                        Icons.color_lens_outlined,
+                        color: Colors.black54,
+                      ),
                     ),
                     SizedBox(
                       width: size.width * 0.025,
@@ -256,17 +289,92 @@ class _DetailPageState extends State<DetailPage> {
                               )
                               .toList(),
                         ]),
-                    // TextSize
-                    Center(
-                      child: Slider(
-                        min: 10,
-                        max: 50,
-                        value: Globals.instance.size,
-                        onChanged: (val) {
-                          Globals.instance.size = val;
-                          setState(() {});
-                        },
-                      ),
+                    // TextProperty
+                    ListView(
+                      children: [
+                        // FontSize
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Globals.instance.size += 3;
+                                setState(() {});
+                              },
+                              icon: const Icon(CupertinoIcons.plus_app),
+                            ),
+                            const Text(
+                              "Font Size: ",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Globals.instance.size -= 3;
+                                setState(() {});
+                              },
+                              icon: const Icon(CupertinoIcons.minus_rectangle),
+                            ),
+                          ],
+                        ),
+                        // FontAlignment
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Globals.instance.quoteTextAlignment =
+                                    TextAlign.left;
+                                setState(() {});
+                              },
+                              icon: const Icon(Icons.format_align_left),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Globals.instance.quoteTextAlignment =
+                                    TextAlign.center;
+                                setState(() {});
+                              },
+                              icon: const Icon(Icons.format_align_center),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Globals.instance.quoteTextAlignment =
+                                    TextAlign.right;
+                                setState(() {});
+                              },
+                              icon: const Icon(Icons.format_align_right),
+                            ),
+                          ],
+                        ),
+                        // FontLetterSpacing
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Globals.instance.quotelettringSpacing += 1;
+                                setState(() {});
+                              },
+                              icon: const Icon(CupertinoIcons.plus_app),
+                            ),
+                            const Text(
+                              "Letter Spacing",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Globals.instance.quotelettringSpacing -= 1;
+                                setState(() {});
+                              },
+                              icon: const Icon(CupertinoIcons.minus_rectangle),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                     // Colour_Picker
                     Column(
@@ -328,6 +436,7 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.blue.shade300,
           onPressed: () {
             showDialog(
               context: context,

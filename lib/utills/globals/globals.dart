@@ -9,6 +9,8 @@ class Globals {
   double angle = 0;
   double size = 14;
   Color quoteTextColor = Colors.black;
+  TextAlign quoteTextAlignment = TextAlign.center;
+  double quotelettringSpacing = 1;
 
   List<Color> allColors = [
     Colors.transparent,
@@ -23,5 +25,6 @@ class Globals {
     angle = 0;
     size = 14;
     quoteTextColor = Colors.black;
+    quotelettringSpacing = 1;
   }
 }
