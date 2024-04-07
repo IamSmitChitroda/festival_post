@@ -38,7 +38,7 @@ https://github.com/IamSmitChitroda/festival_post/assets/143987366/9e3910b5-fcff-
 <p>
   <img align = "left"  src = "" width=22% height=35% >
   
-  <img align = "left"  src = "" width=22% height=35% >
+  <img align = "left"  src = "https://github.com/IamSmitChitroda/festival_post/assets/143987366/f4795f33-f3d9-40dc-b413-19d804ecad10" width=22% height=35% >
   
   <img align = "left"  src = "https://github.com/IamSmitChitroda/festival_post/assets/143987366/158390e8-9a42-46d4-b7cb-c53af1626bae" width=22% height=35% >
   
